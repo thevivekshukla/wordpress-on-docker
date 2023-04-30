@@ -39,6 +39,11 @@ services:
     container_name: webserver
     restart: unless-stopped
     env_file: .env
+    environment:
+      - SERVER_NAME=$DOMAIN
+      - SSL_SERVER_NAME=$DOMAIN
+      - SSL_CERT=/etc/letsencrypt/live/$DOMAIN/fullchain.pem
+      - SSL_CERT_KEY=/etc/letsencrypt/live/$DOMAIN/privkey.pem
     ports:
       - "80:80"
       - "443:443"
@@ -58,7 +63,6 @@ services:
     volumes:
       - ./volumes/certbot-etc:/etc/letsencrypt
       - ./volumes/wordpress:/var/www/html
-    # command: certonly --webroot --webroot-path=/var/www/html --email $EMAIL_ID --agree-tos --no-eff-email --staging -d $DOMAIN
     command: certonly --webroot --webroot-path=/var/www/html --email $EMAIL_ID --agree-tos --no-eff-email --force-renewal -d $DOMAIN
 
 volumes:

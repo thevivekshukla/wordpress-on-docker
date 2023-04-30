@@ -6,8 +6,6 @@ services:
     container_name: db
     restart: unless-stopped
     env_file: .env
-    environment:
-      - MYSQL_DATABASE=$MYSQL_DB_NAME
     volumes:
       - ./volumes/dbdata:/var/lib/mysql
     command: '--default-authentication-plugin=mysql_native_password' # why? read: https://bit.ly/3AC59Ge
@@ -46,12 +44,25 @@ services:
     volumes:
       - ./volumes/wordpress:/var/www/html
       - ./nginx-conf:/etc/nginx/conf.d
+      - ./volumes/certbot-etc:/etc/letsencrypt
     networks:
       - app-network
+  
+  certbot:
+    depends_on:
+      - webserver
+    image: certbot/certbot
+    container_name: certbot
+    env_file: .env
+    volumes:
+      - ./volumes/certbot-etc:/etc/letsencrypt
+      - ./volumes/wordpress:/var/www/html
+    command: certonly --webroot --webroot-path=/var/www/html --email $EMAIL_ID --agree-tos --no-eff-email --staging -d $DOMAIN
 
 volumes:
   dbdata:
   wordpress:
+  certbot-etc:
 
 networks:
   app-network:
