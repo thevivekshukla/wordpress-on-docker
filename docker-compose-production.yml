@@ -39,11 +39,6 @@ services:
     container_name: webserver
     restart: unless-stopped
     env_file: .env
-    environment:
-      - SERVER_NAME=$DOMAIN
-      - SSL_SERVER_NAME=$DOMAIN
-      - SSL_CERT=/etc/letsencrypt/live/$DOMAIN/fullchain.pem
-      - SSL_CERT_KEY=/etc/letsencrypt/live/$DOMAIN/privkey.pem
     ports:
       - "80:80"
       - "443:443"
