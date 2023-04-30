@@ -44,12 +44,25 @@ services:
     volumes:
       - ./nginx-conf-local:/etc/nginx/conf.d:ro
       - ./volumes/wordpress:/var/www/html:ro
+      - ./volumes/certbot-conf:/etc/nginx/ssl:ro
     networks:
       - app-network
+  
+  certbot:
+    depends_on:
+      - webserver
+    image: certbot/certbot
+    container_name: certbot
+    env_file: .env
+    volumes:
+      - ./volumes/wordpress:/var/www/html:rw
+      - ./volumes/certbot-conf:/etc/letsencrypt:rw
+    command: certonly --webroot --webroot-path=/var/www/html --email $EMAIL_ID --agree-tos --no-eff-email --staging -d $DOMAIN
 
 volumes:
   dbdata:
   wordpress:
+  certbot-conf:
 
 networks:
   app-network:
