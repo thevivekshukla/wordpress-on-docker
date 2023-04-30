@@ -42,7 +42,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./nginx-conf:/etc/nginx/conf.d:ro
+      - ./nginx-conf-local:/etc/nginx/conf.d:ro
       - ./volumes/wordpress:/var/www/html:ro
       - ./volumes/certbot-etc:/etc/letsencrypt:ro
     networks:
