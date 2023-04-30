@@ -42,9 +42,9 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./volumes/wordpress:/var/www/html
-      - ./nginx-conf:/etc/nginx/conf.d
-      - ./volumes/certbot-etc:/etc/letsencrypt
+      - ./nginx-conf:/etc/nginx/conf.d:ro
+      - ./volumes/wordpress:/var/www/html:ro
+      - ./volumes/certbot-etc:/etc/letsencrypt:ro
     networks:
       - app-network
   
@@ -55,8 +55,8 @@ services:
     container_name: certbot
     env_file: .env
     volumes:
-      - ./volumes/certbot-etc:/etc/letsencrypt
-      - ./volumes/wordpress:/var/www/html
+      - ./volumes/wordpress:/var/www/html:rw
+      - ./volumes/certbot-etc:/etc/letsencrypt:rw
     command: certonly --webroot --webroot-path=/var/www/html --email $EMAIL_ID --agree-tos --no-eff-email --staging -d $DOMAIN
 
 volumes:
