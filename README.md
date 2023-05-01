@@ -1,7 +1,15 @@
 # wordpress-on-docker
 Dockerized Wordpress. Ready to deploy to production!
 
-## Stage Deployment
+This contains:
+* MySQL Database
+* Wordpress and PHP
+* Nginx as webserver
+* Letsencrypt Certbot for SSL
+
+Clone the repo and move to the repo folder then follow along.
+
+## Staging Deployment
 make a copy of .env file:
 ```shell
 cp example.env .env
