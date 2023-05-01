@@ -92,4 +92,29 @@ to make sure everything is fine.
 **Done!** Now you can open your domain in browser and continue with wordpress setup.
 
 
+### Step 3
+Letsencrypt SSLs are valid for upto 90 days, so we will be needed to renew it. Let's enable auto-renewal of them using cron job.
 
+Copy `ssl_renew.sh` file in your home directory
+```
+cp ssl_renew.sh ~/ssl_renew.sh
+```
+then give it permission to be executable
+```
+chmod +x ~/ssl_renew.sh
+```
+Now add this in crontab
+```
+sudo crontab -e
+```
+Choose editor of your choice, then add this
+```
+0 12 * * * /home/ubuntu/ssl_renew.sh >> /var/log/cron.log 2>&1
+```
+`ubuntu`: replace this with your user name if it's different.
+
+This shell script will run everyday at noon and will renew the certificate if it's due.
+
+---
+
+This setup is partially based on from [Digitalocean: How To Install WordPress With Docker Compose](https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-docker-compose)
