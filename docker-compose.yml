@@ -5,7 +5,11 @@ services:
     image: mysql:8.0.33
     container_name: db
     restart: unless-stopped
-    env_file: .env
+    environment:
+      - MYSQL_ROOT_PASSWORD
+      - MYSQL_DATABASE
+      - MYSQL_USER
+      - MYSQL_PASSWORD
     volumes:
       - ./volumes/dbdata:/var/lib/mysql:rw
     command: '--default-authentication-plugin=mysql_native_password' # why? read: https://bit.ly/3AC59Ge
@@ -21,12 +25,12 @@ services:
     image: wordpress:6.2.0-php8.2-fpm-alpine
     container_name: wordpress
     restart: unless-stopped
-    env_file: .env
     environment:
       - WORDPRESS_DB_HOST=db:3306
       - WORDPRESS_DB_USER=$MYSQL_USER
       - WORDPRESS_DB_PASSWORD=$MYSQL_PASSWORD
       - WORDPRESS_DB_NAME=$MYSQL_DATABASE
+      - WORDPRESS_TABLE_PREFIX
     volumes:
       - ./volumes/wordpress:/var/www/html:rw
     networks:
@@ -38,7 +42,8 @@ services:
     image: nginx:stable
     container_name: webserver
     restart: unless-stopped
-    env_file: .env
+    environment:
+      - DOMAIN
     ports:
       - "80:80"
     volumes:
@@ -53,7 +58,6 @@ services:
       - webserver
     image: certbot/certbot
     container_name: certbot
-    env_file: .env
     volumes:
       - ./volumes/wordpress:/var/www/html:rw
       - ./volumes/certbot-conf:/etc/letsencrypt:rw
