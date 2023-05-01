@@ -33,6 +33,7 @@ services:
       - WORDPRESS_TABLE_PREFIX
     volumes:
       - ./volumes/wordpress:/var/www/html:rw
+      - ./conf/php.custom.ini:/usr/local/etc/php/conf.d/php.custom.ini:ro
     networks:
       - app-network
 
