@@ -41,7 +41,7 @@ To stop:
 docker-compose down
 ```
 
-Stop and remove volumes:
+If you want to stop and remove volumes (volume data will be deleted):
 ```
 docker-compose down -v
 rm -rf volumes
