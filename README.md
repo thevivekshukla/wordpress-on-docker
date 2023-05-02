@@ -7,7 +7,10 @@ This contains:
 * Nginx as webserver
 * Letsencrypt Certbot for SSL
 
-Clone the repo and move to the repo folder then follow along.
+Clone the repo and move to the repo folder then follow along:
+```
+git clone https://github.com/thevivekshukla/wordpress-on-docker.git yourdomain.com
+```
 
 ## Staging Deployment
 make a copy of .env file:
