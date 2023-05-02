@@ -46,7 +46,7 @@ services:
     environment:
       - DOMAIN
     ports:
-      - "$WEBSERVER_PORT_EXPOSED:80"
+      - "${WEBSERVER_PORT_EXPOSED:-80}:80"
     volumes:
       - ./nginx-conf-local:/etc/nginx/conf.d:ro
       - ./volumes/wordpress:/var/www/html:ro
