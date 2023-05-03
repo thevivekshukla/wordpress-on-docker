@@ -43,8 +43,6 @@ services:
     image: nginx:stable
     container_name: webserver
     restart: unless-stopped
-    environment:
-      - DOMAIN
     ports:
       - "${WEBSERVER_PORT_EXPOSED:-80}:80"
     volumes:
