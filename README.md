@@ -25,7 +25,7 @@ nano .env
 
 To start wordpress, run:
 ```
-docker-compose up
+docker compose up
 ```
 
 This will do:
@@ -36,17 +36,17 @@ This will do:
 
 To run in background use:
 ```
-docker-compose up -d
+docker compose up -d
 ```
 
 To stop:
 ```
-docker-compose down
+docker compose down
 ```
 
 If you want to stop and remove volumes (volume data will be deleted):
 ```
-docker-compose down -v
+docker compose down -v
 rm -rf volumes
 ```
 
@@ -62,33 +62,33 @@ rm -rf volumes
 #### Step 1
 First run in staging environment to get staging certificates from certbot.
 ```
-docker-compose up -d
+docker compose up -d
 ```
 
 Check the running service list:
 ```
-docker-compose ps
+docker compose ps
 ```
 
 `certbot` must be in `Exit 0` state and every other services must be in `UP` state. If not then you can debut the issue using:
 ```
-docker-compose logs <service_name>
+docker compose logs <service_name>
 ```
 
 ### Step 2
 Once it is successful, we can take down the services:
 ```
-docker-compose down -v
+docker compose down -v
 ```
 
 Now, we can proceed with production deployment.
 ```
-docker-compose -f docker-compose-production.yml up -d
+docker compose -f docker compose-production.yml up -d
 ```
 
 Check the service status with
 ```
-docker-compose ps
+docker compose ps
 ```
 to make sure everything is fine.
 
@@ -121,6 +121,6 @@ This shell script will run everyday at noon and will renew the certificate if it
 ---
 
 This setup is partially based on from:  
-[Digitalocean: How To Install WordPress With Docker Compose](https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-docker-compose)  
-[WordPress Deployment with NGINX, PHP-FPM and MariaDB using Docker Compose](https://medium.com/swlh/wordpress-deployment-with-nginx-php-fpm-and-mariadb-using-docker-compose-55f59e5c1a)
+[Digitalocean: How To Install WordPress With Docker Compose](https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-docker compose)  
+[WordPress Deployment with NGINX, PHP-FPM and MariaDB using Docker Compose](https://medium.com/swlh/wordpress-deployment-with-nginx-php-fpm-and-mariadb-using-docker compose-55f59e5c1a)
 
