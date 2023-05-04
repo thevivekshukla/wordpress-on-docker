@@ -15,8 +15,6 @@ services:
       - MYSQL_PASSWORD
     volumes:
       - ./volumes/dbdata:/var/lib/mysql:rw
-    networks:
-      - wp-network
 
   wordpress:
     depends_on:
@@ -37,8 +35,6 @@ services:
     volumes:
       - ./volumes/wordpress:/var/www/html:rw
       - ./conf/php.custom.ini:/usr/local/etc/php/conf.d/php.custom.ini:ro
-    networks:
-      - wp-network
 
 volumes:
   dbdata:
@@ -46,5 +42,5 @@ volumes:
   certbot-conf:
 
 networks:
-  wp-network:
+  default:
     driver: bridge

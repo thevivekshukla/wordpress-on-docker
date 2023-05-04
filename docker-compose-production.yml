@@ -11,8 +11,6 @@ services:
       - MYSQL_PASSWORD
     volumes:
       - ./volumes/dbdata:/var/lib/mysql
-    networks:
-      - wp-network
 
   wordpress:
     depends_on:
@@ -31,8 +29,6 @@ services:
     volumes:
       - ./volumes/wordpress:/var/www/html:rw
       - ./conf/php.custom.ini:/usr/local/etc/php/conf.d/php.custom.ini:ro
-    networks:
-      - wp-network
 
   webserver:
     depends_on:
@@ -48,8 +44,6 @@ services:
       - ./nginx-conf-production:/etc/nginx/conf.d:ro
       - ./volumes/wordpress:/var/www/html:ro
       - ./volumes/certbot-conf:/etc/nginx/ssl:ro
-    networks:
-      - wp-network
   
   certbot:
     depends_on:
@@ -59,8 +53,6 @@ services:
       - ./volumes/wordpress:/var/www/html:rw
       - ./volumes/certbot-conf:/etc/letsencrypt:rw
     command: certonly --webroot --webroot-path=/var/www/html --email $EMAIL_ID --agree-tos --no-eff-email --reinstall -d $DOMAIN
-    networks:
-      - wp-network
 
 volumes:
   dbdata:
@@ -68,5 +60,5 @@ volumes:
   certbot-conf:
 
 networks:
-  wp-network:
+  default:
     driver: bridge
