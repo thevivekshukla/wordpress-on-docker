@@ -1,0 +1,51 @@
+# this just runs mysql and setup wordpress with php fpm
+# it will need a nginx conf file outside of docker
+# the sample nginx php conf can be found in conf folder
+
+version: '3.6'
+
+services:
+  db:
+    image: mysql:8.0.33
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD
+      - MYSQL_DATABASE
+      - MYSQL_USER
+      - MYSQL_PASSWORD
+    volumes:
+      - ./volumes/dbdata:/var/lib/mysql:rw
+    command: '--default-authentication-plugin=mysql_native_password' # why? read: https://bit.ly/3AC59Ge
+    networks:
+      - wp-network
+
+  wordpress:
+    depends_on:
+      - db
+    # always use image with wordpress version specified
+    # if upgrading then first upgrade from wordpress updater
+    # in dashboard, then use same version here
+    image: wordpress:6.2.0-php8.2-fpm-alpine
+    restart: unless-stopped
+    environment:
+      - WORDPRESS_DB_HOST=db:3306
+      - WORDPRESS_DB_USER=$MYSQL_USER
+      - WORDPRESS_DB_PASSWORD=$MYSQL_PASSWORD
+      - WORDPRESS_DB_NAME=$MYSQL_DATABASE
+      - WORDPRESS_TABLE_PREFIX
+    ports:
+      - "${WEBSERVER_PORT_EXPOSED:-9000}:9000"
+    volumes:
+      - ./volumes/wordpress:/var/www/html:rw
+      - ./conf/php.custom.ini:/usr/local/etc/php/conf.d/php.custom.ini:ro
+    networks:
+      - wp-network
+
+volumes:
+  dbdata:
+  wordpress:
+  certbot-conf:
+
+networks:
+  wp-network:
+    driver: bridge
