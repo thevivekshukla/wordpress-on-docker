@@ -53,7 +53,7 @@ rm -rf volumes
 
 ## Notes for Production Deployment
 
-* Update domain name in nginx-conf-production/nginx.conf by replacing placeholder REPLACE_WITH_YOUR_DOMAIN with you actual domain where you want to deploy it.
+* Update domain name in nginx-conf-production/nginx.conf by replacing placeholder YOUR_DOMAIN with you actual domain where you want to deploy it.
 * Make sure your domain is pointing to the server where you want to deploy it.
 * Make sure `.env` file contains the data that you want to be used in production deployment.
 * DOMAIN must only contain the actual domain (e.g. example.com) without any scheme (i.e. http or https) and parameter.
