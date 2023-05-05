@@ -52,7 +52,7 @@ services:
     volumes:
       - ./volumes/wordpress:/var/www/html:rw
       - ./volumes/certbot-conf:/etc/letsencrypt:rw
-    command: certonly --webroot --webroot-path=/var/www/html --email $EMAIL_ID --agree-tos --no-eff-email --reinstall -d $DOMAIN
+    command: certonly --webroot --webroot-path=/var/www/html --email $EMAIL_ID --agree-tos --no-eff-email --force-renewal -d $DOMAIN
 
 volumes:
   dbdata:
