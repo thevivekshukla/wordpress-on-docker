@@ -1,6 +1,6 @@
 #!/bin/bash
 
-COMPOSE="/usr/bin/docker-compose -f docker-compose-production.yml --ansi never"
+COMPOSE="/usr/bin/docker compose -f docker-compose-production.yml --ansi never"
 DOCKER="/usr/bin/docker"
 
 cd /home/ubuntu/wordpress-on-docker/
