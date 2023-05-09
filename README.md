@@ -124,3 +124,8 @@ This setup is partially based on from:
 [Digitalocean: How To Install WordPress With Docker Compose](https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-docker-compose)  
 [WordPress Deployment with NGINX, PHP-FPM and MariaDB using Docker Compose](https://medium.com/swlh/wordpress-deployment-with-nginx-php-fpm-and-mariadb-using-docker-compose-55f59e5c1a)
 
+docker compose references:
+[docker compose up](https://docs.docker.com/engine/reference/commandline/compose_up/)
+[docker compose logs](https://docs.docker.com/engine/reference/commandline/compose_logs/)
+[docker compose exec](https://docs.docker.com/engine/reference/commandline/compose_exec/)
+[docker compose down](https://docs.docker.com/engine/reference/commandline/compose_down/)
