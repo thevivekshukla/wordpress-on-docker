@@ -41,12 +41,12 @@ docker compose up -d
 
 To stop:
 ```
-docker compose down
+docker compose down --remove-orphans
 ```
 
 If you want to stop and remove volumes (volume data will be deleted):
 ```
-docker compose down -v
+docker compose down -v --remove-orphans
 rm -rf volumes
 ```
 
@@ -78,12 +78,12 @@ docker compose logs <service_name>
 ### Step 2
 Once it is successful, we can take down the services:
 ```
-docker compose down -v
+docker compose down --remove-orphans
 ```
 
 Now, we can proceed with production deployment.
 ```
-docker compose -f docker compose-production.yml up -d
+docker compose -f docker-compose-production.yml up --remove-orphans --force-recreate --detach
 ```
 
 Check the service status with
