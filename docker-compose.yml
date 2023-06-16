@@ -23,7 +23,7 @@ services:
     # always use image with wordpress version specified
     # if upgrading then first upgrade from wordpress updater
     # in dashboard, then use same version here
-    image: wordpress:6.2.0-php8.2-fpm-alpine
+    image: wordpress:6.2.2-php8.2-fpm-alpine
     restart: unless-stopped
     environment:
       - WORDPRESS_DB_HOST=db:3306
