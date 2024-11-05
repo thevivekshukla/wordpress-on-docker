@@ -11,7 +11,7 @@ services:
       - MYSQL_PASSWORD
     volumes:
       - ./volumes/dbdata:/var/lib/mysql
-  
+
   redis:
     restart: unless-stopped
     image: 'redis:latest'
