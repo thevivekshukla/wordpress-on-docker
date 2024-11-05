@@ -83,7 +83,7 @@ docker compose down --remove-orphans
 
 Now, we can proceed with production deployment.
 ```
-docker compose -f docker-compose-production.yml up --remove-orphans --force-recreate --detach
+docker compose -f docker-compose.production.yml up --remove-orphans --force-recreate --detach
 ```
 
 Check the service status with
