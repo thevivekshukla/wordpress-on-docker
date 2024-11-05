@@ -130,3 +130,13 @@ docker compose references:
 [docker compose exec](https://docs.docker.com/engine/reference/commandline/compose_exec/)  
 [docker compose down](https://docs.docker.com/engine/reference/commandline/compose_down/)  
 
+## Troubleshooting
+
+### Wordpress permission issue
+
+If for any reason there is any permission issue while accesing wordpress filesystem, try to reset the file owner to default:
+
+```shell
+sudo chown -R 82:82 volumes/wordpress
+```
+
